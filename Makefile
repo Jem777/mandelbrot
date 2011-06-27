@@ -4,7 +4,7 @@ INCLUDECFLAGS := `pkg-config --cflags sdl`
 INCLUDELIBFLAGS := -lm `pkg-config --libs sdl` -I"."
 INCLUDEFLAGS := $(INCLUDECFLAGS) $(INCLUDELIBFLAGS)
 
-CPU_ARCHITECTURE := pentium-m
+CPU_ARCHITECTURE := core2
 
 # Flags in common by all
 CFLAGS := -std=c99 -Wall -Wextra -pedantic -pedantic-errors -Wfloat-equal -Wundef -Wshadow -Winit-self

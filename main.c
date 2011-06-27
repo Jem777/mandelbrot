@@ -11,10 +11,7 @@ int main(void){
     SDL_SetVideoMode(1024, 768, 24, SDL_SWSURFACE);
     SDL_Surface *main_surface = SDL_GetVideoSurface();
 
-    test_rendering(main_surface);
-    SDL_UpdateRect(main_surface, 0, 0, 0, 0);
-
-    SDL_Delay(1000);
+    run_rendering(main_surface);
 
     SDL_Quit();
     return 0;

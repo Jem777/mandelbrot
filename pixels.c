@@ -1,6 +1,6 @@
 #include "pixels.h"
 
-void put_pixel(struct SDL_Surface* surface, pixel pix){
+void put_pixel(struct SDL_Surface* surface, pixel_t pix){
     int x = pix.x;
     int y = pix.y;
     Uint32 pixel = SDL_MapRGB(surface->format, pix.r, pix.g, pix.b);
@@ -32,5 +32,8 @@ void put_pixel(struct SDL_Surface* surface, pixel pix){
   case 4:
     *(Uint32 *)p = pixel;
     break;
+  default:
+    fprintf(stderr, "couldn't determine color-depth\n");
+    exit(1);
   }
 }

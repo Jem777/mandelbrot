@@ -8,8 +8,8 @@ typedef struct {
     Uint8 r;
     Uint8 g;
     Uint8 b;
-} pixel;
+} pixel_t;
 
-void put_pixel(struct SDL_Surface* surface, pixel);
+void put_pixel(struct SDL_Surface* surface, pixel_t);
 
 #endif
