@@ -10,6 +10,7 @@ void run_rendering(SDL_Surface* surface) {
     double zoomfactor = 300;
     complex double origin = - 0.743643887037151 + 0.131825904205330*I; 
     double iteration_depth = 100;
+    int counter = 0;
     while(1) {
         render_frame(surface, zoomfactor, origin, iteration_depth);
 
@@ -17,13 +18,18 @@ void run_rendering(SDL_Surface* surface) {
 
         SDL_UpdateRect(surface, 0, 0, 0, 0);
         
-        zoomfactor *= 1.2;
-        iteration_depth += 100.0;
+        zoomfactor *= 1.01;
+        iteration_depth += 2.0;
         printf("iteration depth: %e, iterations: %e\n", iteration_depth, surface->w*surface->h*iteration_depth);
 
-        if(zoomfactor > 300000000000) {
+        if(zoomfactor > 300000000000 || counter == 9999) {
             exit(0);
         }
+        char output_file[100];
+        snprintf(output_file, 100, "out_%04d.bmp", counter);
+        SDL_SaveBMP(surface, output_file);
+        //printf("%s\n", output_file);
+        counter++;
     }
 }
 
