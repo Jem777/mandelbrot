@@ -18,7 +18,7 @@ void run_rendering(SDL_Surface* surface) {
         SDL_UpdateRect(surface, 0, 0, 0, 0);
         
         zoomfactor *= 1.2;
-        iteration_depth += 2.0;
+        iteration_depth += 100.0;
         printf("iteration depth: %e, iterations: %e\n", iteration_depth, surface->w*surface->h*iteration_depth);
 
         if(zoomfactor > 300000000000) {

@@ -8,7 +8,7 @@ int main(void){
         printf("Failed to initialize SDL: %s\n", SDL_GetError());
         return 1;
     }
-    SDL_SetVideoMode(1024, 768, 24, SDL_SWSURFACE);
+    SDL_SetVideoMode(600, 600, 24, SDL_SWSURFACE);
     SDL_Surface *main_surface = SDL_GetVideoSurface();
 
     run_rendering(main_surface);
