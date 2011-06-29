@@ -1,7 +1,7 @@
 CC := gcc
 
-INCLUDECFLAGS := `pkg-config --cflags sdl`
-INCLUDELIBFLAGS := -lm `pkg-config --libs sdl` -I"."
+INCLUDECFLAGS := `pkg-config --cflags IL`
+INCLUDELIBFLAGS := -lm `pkg-config --libs IL` -I"."
 INCLUDEFLAGS := $(INCLUDECFLAGS) $(INCLUDELIBFLAGS)
 
 CPU_ARCHITECTURE := core2
@@ -18,6 +18,8 @@ BINNAME := mandel
 
 default: clean analyze
 	@$(CC) $(CNFLAGS) $(INCLUDEFLAGS) *.c -o $(BINNAME)
+debug: clean analyze
+	@$(CC) -g $(CNFLAGS) $(INCLUDEFLAGS) *.c -o $(BINNAME)
 clean:
 	@$(RM) $(BINNAME)
 	@$(RM) *.plist
