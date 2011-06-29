@@ -8,8 +8,8 @@ int main(void){
 
     //run_rendering(main_surface);
 
-    surface_t *surface = create_surface(400, 400);
-    test_rendering(surface);
+    surface_t *surface = create_surface(800, 820);
+    run_rendering(surface);
     //write_bmp(surface, "foobar.bmp");
 
     return 0;

@@ -41,8 +41,8 @@ int write_bmp(surface_t *s, const char *path) {
     convert_uint(header, 6, 0); // reserved
     convert_uint(header, 10, 54); // start of the bitmap
     convert_uint(header, 14, 40); // header size
-    convert_uint(header, 18, s->w); // width
-    convert_uint(header, 22, s->h); // height
+    convert_uint(header, 18, s->h); // width
+    convert_uint(header, 22, s->w); // height
     convert_ushort(header, 26, 1); // bullshit
     convert_ushort(header, 28, 24); // bpp
     convert_uint(header, 30, 0); // compression
@@ -58,7 +58,7 @@ int write_bmp(surface_t *s, const char *path) {
     pixel_t p;
     for (unsigned int i = 0; i < s->w; i++) {
         for (unsigned int j = 0; j < s->h; j++) {
-            p = get_pixel(s, s->w - i, s->h - j);
+            p = get_pixel(s, j, s->h - i);
             pixel[0] = p.b;
             pixel[1] = p.g;
             pixel[2] = p.r;

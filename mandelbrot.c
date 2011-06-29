@@ -31,16 +31,11 @@ void run_rendering(surface_t* surface) {
 }
 
 void render_frame(surface_t* surface, double zoomfactor, complex double origin, double iteration_depth){
-    for(unsigned int x=0;  x<surface->w; x++) {
-        for(unsigned int y=0;  y<surface->h; y++) {
-            complex double test_point = (x - surface->w/2) + (y - surface->h/2) * I;
+    for(unsigned int x=0;  x < surface->w; x++) {
+        for(unsigned int y=0;  y < surface->h; y++) {
+            complex double test_point = ((int)x - (int)surface->w / 2) + ((int)y - (int)surface->h / 2) * I;
             double scale = iterate_complex(conj(origin) + test_point/zoomfactor, iteration_depth);
-            //pixel_t p = colorize(scale);
-            //set_pixel(surface, x, y, p);
-            pixel_t p;
-            p.r = (unsigned char)(255*scale);
-            p.g = (unsigned char)rand();
-            p.b = 0;
+            pixel_t p = colorize(scale);
             set_pixel(surface, x, y, p);
         }
     }
