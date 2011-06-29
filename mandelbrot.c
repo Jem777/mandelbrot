@@ -7,6 +7,20 @@ void test_rendering(surface_t* surface){
     write_bmp(surface, "foobar.bmp");
 }
 
+void setup_threads(unsigned int x, unsigned int y) {
+}
+
+void run_renderingp(unsigned int x, unsigned int y, rendering_t *data, unsigned length) {
+    surface_t *surface = create_surface(x, y);
+    char output_file[100];
+    for (unsigned int i = 0; i < length; i++) {
+        render_frame(surface, data[i].zoomfactor, data[i].origin, data[i].iteration_depth);
+        snprintf(output_file, 100, "out_%04d.bmp", data[i].counter);
+        write_bmp(surface, output_file);
+    }
+    destroy_surface(surface);
+}
+
 void run_rendering(surface_t* surface) {
     double zoomfactor = 300;
     complex double origin = - 0.743643887037151 + 0.131825904205330*I; 

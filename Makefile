@@ -17,9 +17,9 @@ CNFLAGS := $(CFLAGS) -mtune=$(CPU_ARCHITECTURE) -O3 -fno-stack-protector -Wstric
 BINNAME := mandel
 
 default: clean analyze
-	@$(CC) $(CNFLAGS) $(INCLUDEFLAGS) *.c -o $(BINNAME)
+	@$(CC) $(CNFLAGS) *.c -o $(BINNAME)
 debug: clean analyze
-	@$(CC) -g $(CNFLAGS) $(INCLUDEFLAGS) *.c -o $(BINNAME)
+	@$(CC) -g $(CNFLAGS) *.c -o $(BINNAME)
 clean:
 	@$(RM) $(BINNAME)
 	@$(RM) *.plist
@@ -28,7 +28,7 @@ clean:
 CLANG := clang
 CLANGFLAGS := -std=c99 -march=$(CPU_ARCHITECTURE) -O2
 clang: clean analyze
-	@$(CLANG) $(CLANGFLAGS) $(INCLUDEFLAGS) *.c $(INTFILE) -o engine
+	@$(CLANG) $(CLANGFLAGS) *.c $(INTFILE) -o engine
 analyze:
-	@$(CLANG) $(CLANGFLAGS) $(INCLUDECFLAGS) --analyze *.c $(INTFILE)
+	@$(CLANG) $(CLANGFLAGS) --analyze *.c $(INTFILE)
 
