@@ -7,13 +7,12 @@ void test_rendering(surface_t* surface){
     write_bmp(surface, "foobar.bmp");
 }
 
-void setup_threads(unsigned int x, unsigned int y) {
-}
-
-void run_renderingp(unsigned int x, unsigned int y, rendering_t *data, unsigned length) {
-    surface_t *surface = create_surface(x, y);
+void run_renderingp(targets_t target_list) {
+    surface_t *surface = create_surface(target_list.x, target_list.y);
     char output_file[100];
-    for (unsigned int i = 0; i < length; i++) {
+    rendering_t *data = target_list.data;
+    for (unsigned int i = target_list.thread_number; i < target_list.length; i += target_list.thread_max) {
+        printf("rendering target %d\n", data[i].counter);
         render_frame(surface, data[i].zoomfactor, data[i].origin, data[i].iteration_depth);
         snprintf(output_file, 100, "out_%04d.bmp", data[i].counter);
         write_bmp(surface, output_file);
@@ -48,7 +47,7 @@ void render_frame(surface_t* surface, double zoomfactor, complex double origin, 
     for(unsigned int x=0;  x < surface->w; x++) {
         for(unsigned int y=0;  y < surface->h; y++) {
             complex double test_point = ((int)x - (int)surface->w / 2) + ((int)y - (int)surface->h / 2) * I;
-            double scale = iterate_complex(conj(origin) + test_point/zoomfactor, iteration_depth);
+            double scale = iterate_complex(origin + test_point/zoomfactor, iteration_depth);
             pixel_t p = colorize(scale);
             set_pixel(surface, x, y, p);
         }
@@ -74,3 +73,4 @@ pixel_t colorize(double scale) {
     p.b = (unsigned char)(255*scale);
     return p;
 }
+

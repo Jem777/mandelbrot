@@ -1,8 +1,10 @@
 CC := gcc
 
-INCLUDECFLAGS := `pkg-config --cflags IL`
-INCLUDELIBFLAGS := -lm `pkg-config --libs IL` -I"."
-INCLUDEFLAGS := $(INCLUDECFLAGS) $(INCLUDELIBFLAGS)
+#INCLUDECFLAGS := `pkg-config --cflags IL`
+#INCLUDELIBFLAGS := -lm `pkg-config --libs IL` -I"."
+#INCLUDEFLAGS := $(INCLUDECFLAGS) $(INCLUDELIBFLAGS)
+
+INCLUDEFLAGS := -lm -lpthread -D_POSIX_SOURCE
 
 CPU_ARCHITECTURE := core2
 
@@ -17,9 +19,9 @@ CNFLAGS := $(CFLAGS) -mtune=$(CPU_ARCHITECTURE) -O3 -fno-stack-protector -Wstric
 BINNAME := mandel
 
 default: clean analyze
-	@$(CC) $(CNFLAGS) *.c -o $(BINNAME)
+	@$(CC) $(CNFLAGS) $(INCLUDEFLAGS) *.c -o $(BINNAME)
 debug: clean analyze
-	@$(CC) -g $(CNFLAGS) *.c -o $(BINNAME)
+	@$(CC) -g $(CNFLAGS) $(INCLUDEFLAGS) *.c -o $(BINNAME)
 clean:
 	@$(RM) $(BINNAME)
 	@$(RM) *.plist
