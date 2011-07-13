@@ -16,6 +16,10 @@ CDFLAGS := $(CFLAGS) -g -O0 -fstack-protector-all -Wstack-protector -Wstrict-ove
 CNFLAGS := $(CFLAGS) -mtune=$(CPU_ARCHITECTURE) -O3 -fno-stack-protector -Wstrict-overflow -Wswitch-default \
 -Wunreachable-code -Winline -Winit-self
 
+# flags for the HPC machine. It has an old GCC, and doesn't know all flags newer GCCs do.
+CHPCFLAGS := -std=c99 -Wall -Wextra -pedantic -Wfloat-equal -Wundef -Wshadow -Winit-self -mtune=$(CPU_ARCHITECTURE) \
+-O3 -fno-stack-protector -Wswitch-default -Wunreachable-code -Winline -Winit-self
+
 BINNAME := mandel
 
 default: clean analyze
@@ -25,6 +29,8 @@ debug: clean analyze
 clean:
 	@$(RM) $(BINNAME)
 	@$(RM) *.plist
+hpc:
+	@$(CC) $(CHPCFLAGS) $(INCLUDEFLAGS) *.c -o $(BINNAME)
 
 # Clang Compiler
 CLANG := clang
