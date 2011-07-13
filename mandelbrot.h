@@ -25,6 +25,6 @@ void run_renderingp(targets_t);
 void render_frame(surface_t*, double zoomfactor, complex double origin, double iteration_depth);
 double iterate_complex(complex double, int max_iteration);
 pixel_t colorize(double);
-
+void move_file(char*, char*);
 
 #endif

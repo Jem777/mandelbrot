@@ -4,7 +4,7 @@ CC := gcc
 #INCLUDELIBFLAGS := -lm `pkg-config --libs IL` -I"."
 #INCLUDEFLAGS := $(INCLUDECFLAGS) $(INCLUDELIBFLAGS)
 
-INCLUDEFLAGS := -lm -lpthread -D_POSIX_SOURCE
+INCLUDEFLAGS := -lm -lpthread -D_POSIX_SOURCE #-I"/usr/include/i386-linux-gnu/"
 
 CPU_ARCHITECTURE := core2
 
@@ -28,7 +28,7 @@ clean:
 
 # Clang Compiler
 CLANG := clang
-CLANGFLAGS := -std=c99 -march=$(CPU_ARCHITECTURE) -O2
+CLANGFLAGS := -std=c99 -march=$(CPU_ARCHITECTURE) -O2 -I"/usr/include/i386-linux-gnu/"
 clang: clean analyze
 	@$(CLANG) $(CLANGFLAGS) *.c $(INTFILE) -o engine
 analyze:

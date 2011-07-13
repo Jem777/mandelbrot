@@ -1,4 +1,6 @@
 #include "mandelbrot.h"
+#include <stdio.h>
+#include <errno.h>
 
 void test_rendering(surface_t* surface){
     double zoomfactor = 300;
@@ -16,6 +18,7 @@ void run_renderingp(targets_t target_list) {
         render_frame(surface, data[i].zoomfactor, data[i].origin, data[i].iteration_depth);
         snprintf(output_file, 100, "out_%04d.bmp", data[i].counter);
         write_bmp(surface, output_file);
+	move_file(output_file, "output");
     }
     destroy_surface(surface);
 }
@@ -74,3 +77,12 @@ pixel_t colorize(double scale) {
     return p;
 }
 
+void move_file(char *file, char *dirname){
+  char newname[256];
+  snprintf(newname, 256, "%s/%s", dirname, file);
+  if(rename(file, newname) == -1){
+    char errormessage[256];
+    snprintf(errormessage, 256, "Error moving '%s' to '%s/'", file, dirname);
+    perror(errormessage);
+  }
+}
