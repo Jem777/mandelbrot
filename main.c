@@ -6,13 +6,13 @@
 
 int main(void){
 
-    unsigned int length = 100;
+    unsigned int length = 1000;
     long numCPU = sysconf( _SC_NPROCESSORS_ONLN );
 
     rendering_t start_render;
     start_render.origin = - 0.743643887037151 + 0.131825904205330*I; 
-    start_render.zoomfactor = 300;
-    start_render.iteration_depth = 100;
+    start_render.zoomfactor = 30000;
+    start_render.iteration_depth = 500;
     start_render.counter = 0;
 
     rendering_t *rendering_list = create_rendering(start_render, length, 1.01, 2);
