@@ -3,11 +3,12 @@
 
 #include <complex.h>
 #include "surface.h"
+#include "common.h"
 
 typedef struct {
-    complex double origin;
-    double zoomfactor;
-    double iteration_depth;
+    complexreal origin;
+    real zoomfactor;
+    real iteration_depth;
     unsigned int counter;
 } rendering_t;
 
@@ -22,9 +23,9 @@ typedef struct {
 void test_rendering(surface_t*);
 void run_rendering(surface_t* surface);
 void run_renderingp(targets_t);
-void render_frame(surface_t*, double zoomfactor, complex double origin, double iteration_depth);
-double iterate_complex(complex double, int max_iteration);
-pixel_t colorize(double);
+void render_frame(surface_t*, real zoomfactor, complexreal origin, real iteration_depth);
+real iterate_complex(complexreal, int max_iteration);
+pixel_t colorize(real);
 void move_file(char*, char*);
 
 #endif
