@@ -3,8 +3,14 @@
 #include <unistd.h>
 
 #include "threading.h"
+#include <gmp.h>
 
 int main(void){
+
+  // set gmp precision
+  mpf_set_default_prec(128);
+  long unsigned int precision = mpf_get_default_prec();
+  printf("precision used: %ld bits\n", precision);
 
     unsigned int length = 10000;
     long numCPU = sysconf( _SC_NPROCESSORS_ONLN );
