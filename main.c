@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <complex.h>
 #include <unistd.h>
+#include <math.h>
 
 #include "threading.h"
 #include <gmp.h>
@@ -14,6 +15,10 @@ int main(void){
 
     unsigned int length = 10000;
     long numCPU = sysconf( _SC_NPROCESSORS_ONLN );
+    if(numCPU > 10){
+      numCPU = numCPU + (int)floor(numCPU/10);
+    }
+    printf("Using %ld threads (%d over-allocated)\n", numCPU, (int)floor(numCPU/10));
 
     rendering_t start_render;
     start_render.origin = - 0.743643887037151 + 0.131825904205330*I; 
@@ -24,8 +29,8 @@ int main(void){
     rendering_t *rendering_list = create_rendering(start_render, length, 1.01, 2);
 
     targets_t target_list;
-    target_list.x = 400;
-    target_list.y = 400;
+    target_list.x = 200;
+    target_list.y = 200;
     target_list.data = rendering_list;
     target_list.length = length;
     target_list.thread_number = 0;
