@@ -24,8 +24,8 @@ int main(void){
     rendering_t *rendering_list = create_rendering(start_render, length, 1.01, 2);
 
     targets_t target_list;
-    target_list.x = 800;
-    target_list.y = 800;
+    target_list.x = 400;
+    target_list.y = 400;
     target_list.data = rendering_list;
     target_list.length = length;
     target_list.thread_number = 0;
