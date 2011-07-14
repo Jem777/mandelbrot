@@ -17,7 +17,7 @@ CNFLAGS := $(CFLAGS) -mtune=$(CPU_ARCHITECTURE) -O3 -fno-stack-protector -Wstric
 -Wunreachable-code -Winline -Winit-self
 
 # flags for the HPC machine. It has an old GCC, and doesn't know all flags newer GCCs do.
-CHPCFLAGS := -std=c99 -Wall -Wextra -pedantic -Wfloat-equal -Wundef -Wshadow -Winit-self -mtune=$(CPU_ARCHITECTURE) \
+CHPCFLAGS := -std=c99 -Wall -Wextra -pedantic -Wfloat-equal -Wundef -Wshadow -Winit-self \
 -O3 -fno-stack-protector -Wswitch-default -Wunreachable-code -Winline -Winit-self
 
 BINNAME := mandel

@@ -6,7 +6,7 @@
 
 int main(void){
 
-    unsigned int length = 1000;
+    unsigned int length = 100000;
     long numCPU = sysconf( _SC_NPROCESSORS_ONLN );
 
     rendering_t start_render;
@@ -18,8 +18,8 @@ int main(void){
     rendering_t *rendering_list = create_rendering(start_render, length, 1.01, 2);
 
     targets_t target_list;
-    target_list.x = 2000;
-    target_list.y = 2000;
+    target_list.x = 200;
+    target_list.y = 200;
     target_list.data = rendering_list;
     target_list.length = length;
     target_list.thread_number = 0;
