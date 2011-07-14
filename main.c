@@ -13,7 +13,7 @@ int main(void){
   long unsigned int precision = mpf_get_default_prec();
   printf("precision used: %ld bits\n", precision);
 
-    unsigned int length = 10000;
+    unsigned int length = 1;
     long numCPU = sysconf( _SC_NPROCESSORS_ONLN );
     if(numCPU > 10){
       numCPU = numCPU + (int)floor(numCPU/10);
@@ -22,8 +22,8 @@ int main(void){
 
     rendering_t start_render;
     start_render.origin = - 0.743643887037151 + 0.131825904205330*I; 
-    start_render.zoomfactor = 30000;
-    start_render.iteration_depth = 500;
+    start_render.zoomfactor = 300000000000;
+    start_render.iteration_depth = 4000;
     start_render.counter = 0;
 
     rendering_t *rendering_list = create_rendering(start_render, length, 1.01, 2);

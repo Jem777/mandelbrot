@@ -44,12 +44,28 @@ void render_frame(surface_t* surface, real zoomfactor, real origin_r, real origi
       real testpoint_i = ((int)y - (int)surface->h / 2);
       
       int iteration_step = 0;
-      mpf_set_d(z_r, 0.0);
+      mpf_set_d(z_r, 0.0); // z = 0+0i
       mpf_set_d(z_i, 0.0);
-      mpf_set_d(c_r, origin_r + testpoint_r/zoomfactor);
-      mpf_set_d(c_i, origin_i + testpoint_i/zoomfactor);
-      /* real z_r = 0.0; */
-      /* real z_i = 0.0; */
+
+      // START COMPUTATION: c_r = origin_r + testpoint_r/zoomfactor
+      mpf_set_d(tmp_a, testpoint_r);
+      mpf_set_d(tmp_b, zoomfactor);
+      mpf_div(tmp_c, tmp_a, tmp_b);
+      mpf_set_d(tmp_a, origin_r);
+      mpf_add(c_r, tmp_c, tmp_a);
+
+      // START COMPUTATION: c_i = origin_i + testpoint_i/zoomfactor
+      mpf_set_d(tmp_a, testpoint_i);
+      mpf_set_d(tmp_b, zoomfactor);
+      mpf_div(tmp_c, tmp_a, tmp_b);
+      mpf_set_d(tmp_a, origin_i);
+      mpf_add(c_i, tmp_c, tmp_a);
+
+
+      /* mpf_div(tmp_a, testpoint_r, zoomfactor); */
+      /* mpf_set_d(c_r, origin_r + testpoint_r/zoomfactor); */
+      /* mpf_set_d(c_i, origin_i + testpoint_i/zoomfactor); */
+
       
       while(iteration_step < iteration_depth){
 	// START COMPUTATION: xtemp = z_r*z_r - z_i*z_i + c_r;
