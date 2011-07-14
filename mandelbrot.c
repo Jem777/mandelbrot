@@ -96,6 +96,7 @@ real iterate_complex(real in_c_r, real in_c_i, int max_iteration) {
     mpf_clear(c_i);
     mpf_clear(tmp_a);
     mpf_clear(tmp_b);
+    mpf_clear(tmp_c);
 
     real scale = (real)iteration_step / max_iteration;
     return scale;
