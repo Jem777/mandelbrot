@@ -23,8 +23,8 @@ typedef struct {
 void test_rendering(surface_t*);
 void run_rendering(surface_t* surface);
 void run_renderingp(targets_t);
-void render_frame(surface_t*, real zoomfactor, complexreal origin, real iteration_depth);
-real iterate_complex(complexreal, int max_iteration);
+void render_frame(surface_t*, real zoomfactor, real origin_r, real origin_i, real iteration_depth);
+real iterate_complex(real, real, int max_iteration);
 pixel_t colorize(real);
 void move_file(char*, char*);
 

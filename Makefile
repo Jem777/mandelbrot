@@ -4,7 +4,7 @@ CC := gcc
 #INCLUDELIBFLAGS := -lm `pkg-config --libs IL` -I"."
 #INCLUDEFLAGS := $(INCLUDECFLAGS) $(INCLUDELIBFLAGS)
 
-INCLUDEFLAGS := -lm -lpthread -D_POSIX_SOURCE #-I"/usr/include/i386-linux-gnu/"
+INCLUDEFLAGS := -lm -lpthread -lgmp -D_POSIX_SOURCE #-I"/usr/include/i386-linux-gnu/"
 
 CPU_ARCHITECTURE := core2
 
