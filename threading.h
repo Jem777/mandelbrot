@@ -2,6 +2,7 @@
 #define THREADING_H_
 
 #include "mandelbrot.h"
+#include "common.h"
 #include <pthread.h>
 #include <errno.h>
 
@@ -14,6 +15,6 @@ void create_threads(targets_t target_list);
 void *worker(void *input);
 void report_error(int status);
 
-rendering_t *create_rendering(rendering_t target, unsigned int length, double zfactor, double ifactor);
+rendering_t *create_rendering(rendering_t target, unsigned int length, real zfactor, real ifactor);
 void destroy_rendering(rendering_t *rendering_list);
 #endif

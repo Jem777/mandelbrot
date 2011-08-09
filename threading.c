@@ -55,10 +55,10 @@ void report_error(int status){
     }
 }
 
-rendering_t *create_rendering(rendering_t target, unsigned int length, double zfactor, double ifactor) {
+rendering_t *create_rendering(rendering_t target, unsigned int length, real zfactor, real ifactor) {
     rendering_t *rendering_list = malloc(sizeof(rendering_t) * length);
-    double current_zoom = target.zoomfactor;
-    double current_depth = target.iteration_depth;
+    real current_zoom = target.zoomfactor;
+    real current_depth = target.iteration_depth;
     for (unsigned int i = 0; i < length; i++) {
         rendering_list[i].origin = target.origin;
         rendering_list[i].zoomfactor = current_zoom;
