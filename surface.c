@@ -18,6 +18,15 @@ void destroy_surface(surface_t *s) {
     free(s);
 }
 
+void set_data(surface_t *s, unsigned int start, unsigned int count, pixel_t *data) {
+    if (s->w * s->h < start + count) {
+        return;
+    }
+    for (unsigned int i=0; i < count; i++) {
+        s->pixels[start + i] = data[i];
+    }
+}
+
 void set_pixel(surface_t *s, unsigned int w, unsigned int h, pixel_t color) {
     if (w <= s->w && h <= s->h) {
         s->pixels[w + h * s->w] = color;

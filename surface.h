@@ -19,6 +19,7 @@ typedef struct{
 surface_t *create_surface(unsigned int, unsigned int);
 void destroy_surface(surface_t*);
 
+void set_data(surface_t*, unsigned int, unsigned int, pixel_t*);
 void set_pixel(surface_t*, unsigned int, unsigned int, pixel_t);
 pixel_t get_pixel(surface_t*, unsigned int, unsigned int);
 int write_bmp(surface_t*, const char*);
