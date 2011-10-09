@@ -18,8 +18,6 @@ typedef struct {
     unsigned int length;
 } targets_t;
 
-void test_rendering(surface_t*);
-void run_single_rendering(surface_t* surface);
 void render_frame(surface_t*, real zoomfactor, complexreal origin, real iteration_depth);
 real iterate_complex(complexreal, int max_iteration);
 pixel_t colorize(real);

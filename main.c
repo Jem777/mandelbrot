@@ -23,10 +23,5 @@ int main(void){
 
     run_rendering(target_list);
     destroy_rendering(rendering_list);
-    /*rendering_t target_b[3];
-    target_b[0] = rendering_t{origin, zoomfactor*1.3, iteration_depth, 3};
-    target_b[1] = {origin, zoomfactor*1.4, iteration_depth, 4};
-    target_b[2] = {origin, zoomfactor*1.5, iteration_depth, 5};
-    */
     return 0;
 }
