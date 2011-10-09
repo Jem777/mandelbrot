@@ -2,12 +2,10 @@
 #include <complex.h>
 #include <unistd.h>
 
-#include "threading.h"
+#include "mandelbrot.h"
 
 int main(void){
-
-    unsigned int length = 100000;
-    long numCPU = sysconf( _SC_NPROCESSORS_ONLN );
+    unsigned int length = 100;
 
     rendering_t start_render;
     start_render.origin = - 0.743643887037151 + 0.131825904205330*I; 
@@ -22,10 +20,8 @@ int main(void){
     target_list.y = 200;
     target_list.data = rendering_list;
     target_list.length = length;
-    target_list.thread_number = 0;
-    target_list.thread_max = (unsigned int)numCPU;
 
-    create_threads(target_list);
+    run_rendering(target_list);
     destroy_rendering(rendering_list);
     /*rendering_t target_b[3];
     target_b[0] = rendering_t{origin, zoomfactor*1.3, iteration_depth, 3};

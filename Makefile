@@ -9,7 +9,7 @@ INCLUDEFLAGS := -lm -lpthread -D_POSIX_SOURCE #-I"/usr/include/i386-linux-gnu/"
 CPU_ARCHITECTURE := core2
 
 # Flags in common by all
-CFLAGS := -std=c99 -Wall -Wextra -pedantic -pedantic-errors -Wfloat-equal -Wundef -Wshadow -Winit-self
+CFLAGS := -std=c99 -Wall -Wextra -pedantic -pedantic-errors -Wfloat-equal -Wundef -Wshadow -Winit-self -fopenmp
 # Flags for debugging builds
 CDFLAGS := $(CFLAGS) -g -O0 -fstack-protector-all -Wstack-protector -Wstrict-overflow=4
 # Flags for normal builds

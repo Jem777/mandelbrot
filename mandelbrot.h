@@ -16,16 +16,16 @@ typedef struct {
     unsigned int x, y;
     rendering_t *data;
     unsigned int length;
-    unsigned int thread_number;
-    unsigned int thread_max;
 } targets_t;
 
 void test_rendering(surface_t*);
-void run_rendering(surface_t* surface);
-void run_renderingp(targets_t);
+void run_single_rendering(surface_t* surface);
 void render_frame(surface_t*, real zoomfactor, complexreal origin, real iteration_depth);
 real iterate_complex(complexreal, int max_iteration);
 pixel_t colorize(real);
 void move_file(char*, char*);
 
+void run_rendering(targets_t target_list);
+rendering_t *create_rendering(rendering_t target, unsigned int length, real zfactor, real ifactor);
+void destroy_rendering(rendering_t *rendering_list);
 #endif

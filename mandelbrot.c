@@ -9,21 +9,7 @@ void test_rendering(surface_t* surface){
     write_bmp(surface, "foobar.bmp");
 }
 
-void run_renderingp(targets_t target_list) {
-    surface_t *surface = create_surface(target_list.x, target_list.y);
-    char output_file[100];
-    rendering_t *data = target_list.data;
-    for (unsigned int i = target_list.thread_number; i < target_list.length; i += target_list.thread_max) {
-        printf("rendering target %d\n", data[i].counter);
-        render_frame(surface, data[i].zoomfactor, data[i].origin, data[i].iteration_depth);
-        snprintf(output_file, 100, "out_%04d.bmp", data[i].counter);
-        write_bmp(surface, output_file);
-	move_file(output_file, "output");
-    }
-    destroy_surface(surface);
-}
-
-void run_rendering(surface_t* surface) {
+void run_single_rendering(surface_t* surface) {
     real zoomfactor = 300;
     complexreal origin = - 0.743643887037151 + 0.131825904205330*I; 
     real iteration_depth = 100;
@@ -86,3 +72,41 @@ void move_file(char *file, char *dirname){
     perror(errormessage);
   }
 }
+
+rendering_t *create_rendering(rendering_t target, unsigned int length, real zfactor, real ifactor) {
+    rendering_t *rendering_list = malloc(sizeof(rendering_t) * length);
+    real current_zoom = target.zoomfactor;
+    real current_depth = target.iteration_depth;
+    for (unsigned int i = 0; i < length; i++) {
+        rendering_list[i].origin = target.origin;
+        rendering_list[i].zoomfactor = current_zoom;
+        rendering_list[i].iteration_depth = current_depth;
+        rendering_list[i].counter = i;
+        current_zoom *= zfactor;
+        current_depth += ifactor;
+    }
+    return rendering_list;
+}
+
+void destroy_rendering(rendering_t *rendering_list) {
+    free(rendering_list);
+}
+
+void run_rendering(targets_t target_list) {
+    char output_file[100];
+    surface_t *surface;
+#pragma omp parallel private(surface)
+    {
+    surface = create_surface(target_list.x, target_list.y);
+#pragma omp for private(output_file)
+    for (unsigned int i = 0; i < target_list.length; i++) {
+        printf("rendering target %d\n", target_list.data[i].counter);
+        render_frame(surface, target_list.data[i].zoomfactor, target_list.data[i].origin, target_list.data[i].iteration_depth);
+        snprintf(output_file, 100, "out_%04d.bmp", target_list.data[i].counter);
+        write_bmp(surface, output_file);
+        move_file(output_file, "output");
+    }
+    destroy_surface(surface);
+    }
+}
+
